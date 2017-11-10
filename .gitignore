@@ -1,2 +1,9 @@
 *.vcxproj
 WeakMemesGame.vcxproj.filters
+*.obj
+Debug/vc140.idb
+*.pdb
+Debug/WeakMemesGame.log
+*.tlog
+x64/Debug/vc140.idb
+*.log
