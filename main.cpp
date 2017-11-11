@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Maps.h"
 #include "Character.h"
+#include <chrono>
 
 using namespace std;
 
@@ -47,8 +48,10 @@ int main()
 	std::vector<Character> soldiers;
 	//--------------------------------------
 
-
-
+	//MEHICANS STUFF
+	//--------------------------------------
+	std::vector<Character> mehicans;
+	//--------------------------------------
 
 	sf::RectangleShape(sf::Vector2f(32,32));
     shape.setFillColor(sf::Color::Green);
@@ -87,6 +90,9 @@ int main()
 	sf::IntRect rectTrump(0, 0, 128, 128);
 	sf::Sprite aniTrump(trump, rectTrump);
 
+	//Timer for spawns
+	auto spawnTimer = std::chrono::high_resolution_clock::now();
+
     while (window.isOpen())
     {
 
@@ -114,11 +120,26 @@ int main()
 				tmp.setPosMat(mX, mY);
 				soldiers.push_back(tmp);
 			}
-
-			cout << mX << " : " << mY << endl;
+			
+			
 		}
 		//----------------------------------------
 
+		auto endTime = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<double, std::milli> elapsedTime = endTime - spawnTimer;
+
+		auto elapsed = (int)elapsedTime.count();
+
+		
+		//SPAWNING THE MEHICANS
+		//----------------------------------------
+		if (elapsed % 200 == 0) {
+			Character tmp("Data/mexican.txt");
+			tmp.setPosMat(test.getStartX(), test.getStartY());
+			mehicans.push_back(tmp);
+			spawnTimer = std::chrono::high_resolution_clock::now();
+		}
+		//----------------------------------------
 
         window.clear();
 
@@ -162,6 +183,22 @@ int main()
 			aniChar.setTextureRect(aniRect);
 			aniChar.setPosition(soldiers[i].getX(), soldiers[i].getY());
 			window.draw(aniChar);
+		}
+
+		for (int i{ 0 }; i < mehicans.size(); ++i) {
+			mehicans[i].update(test.getMat());
+			
+			
+
+			aniChar.setTexture(mehicans[i].getTex());
+			aniRect.left = mehicans[i].getSheetX() * 32;
+			aniRect.top = mehicans[i].getSheetY() * 32;
+			aniChar.setTextureRect(aniRect);
+			aniChar.setPosition(mehicans[i].getX(), mehicans[i].getY());
+			window.draw(aniChar);
+
+
+			mehicans.clear();
 		}
 
 		/*

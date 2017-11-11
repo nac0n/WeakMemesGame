@@ -5,6 +5,7 @@
 
 Character::Character(std::string conf)
 {
+	loadFile = conf;
 	std::ifstream confFile;
 	confFile.open(conf);
 
@@ -15,8 +16,6 @@ Character::Character(std::string conf)
 	if (!sheet.loadFromFile(fileName)) {
 		std::cerr << "Error loading sprite" << std::endl;
 	}
-	else
-		std::cout << "Sprite loaded successfully" << std::endl;
 
 	confFile >> aniStepX;
 	confFile >> aniStepY;
@@ -26,10 +25,10 @@ Character::Character(std::string conf)
 
 }
 
+
+
 void Character::update(Matrix mat)
 {
-	
-
 	if (canMove && !moving) {
 		//Find new go
 		//std::cout << "Finding new go" << std::endl;
@@ -106,3 +105,6 @@ void Character::update(Matrix mat)
 	aniY = facing;
 
 }
+
+
+

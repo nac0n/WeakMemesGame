@@ -22,7 +22,11 @@ public:
 	int getX() { return x; };
 	int getY() { return y; };
 
+	int getStartX() { return startX; };
+	int getStartY() { return startY; };
+
 	void setPosMat(int x, int y) { startX = goX = x; startY = goY = y; this->x = startX * 32; this->y = startY * 32; };
+
 
 	sf::Texture& getTex() { return sheet; };
 
@@ -43,6 +47,7 @@ private:
 	int aniStepY{ 0 };
 	int facing{ 0 }; //0 = up, 1 = right, 2 = down, 3 = left
 
+	std::string loadFile;
 
 	bool canAttack{ false };
 	bool canMove{ false };
