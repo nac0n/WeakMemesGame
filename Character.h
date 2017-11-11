@@ -13,7 +13,7 @@ public:
 	Character(std::string conf);
 	~Character() = default;
 
-	void update(Matrix& mat);
+	void update(Matrix mat);
 	void attack();
 
 	int getSheetX() { return aniX; };

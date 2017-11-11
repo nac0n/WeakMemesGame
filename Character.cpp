@@ -26,7 +26,7 @@ Character::Character(std::string conf)
 
 }
 
-void Character::update(Matrix& mat)
+void Character::update(Matrix mat)
 {
 	
 
