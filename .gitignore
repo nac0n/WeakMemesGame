@@ -7,3 +7,4 @@ Debug/WeakMemesGame.log
 *.tlog
 x64/Debug/vc140.idb
 *.log
+*.o
