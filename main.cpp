@@ -38,6 +38,18 @@ int main()
 	//--------------------------------------
 
 
+
+
+	//TOWER HANDLING STUFF
+	//--------------------------------------
+	Matrix towerMat{ 30,20 };
+	towerMat.fillWith(0);
+	std::vector<Character> soldiers;
+	//--------------------------------------
+
+
+
+
 	sf::RectangleShape(sf::Vector2f(32,32));
     shape.setFillColor(sf::Color::Green);
     
@@ -87,6 +99,27 @@ int main()
             }
         }
 
+		//Events
+		//----------------------------------------
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+			int mX = sf::Mouse::getPosition(window).x;
+			int mY = sf::Mouse::getPosition(window).y;
+
+			mX /= (int)(32 * (((double)window.getSize().x) / ((double)1280)));
+			mY /= (int)(32 * (((double)window.getSize().y) / ((double)720)));
+
+			if (test.getMat().at(mX, mY) == 0 && towerMat.at(mX, mY) == 0) {
+				towerMat.at(mX, mY) = 1;
+				Character tmp("Data/soldier.txt");
+				tmp.setPosMat(mX, mY);
+				soldiers.push_back(tmp);
+			}
+
+			cout << mX << " : " << mY << endl;
+		}
+		//----------------------------------------
+
+
         window.clear();
 
 		
@@ -103,7 +136,6 @@ int main()
 					window.draw(tile1);
 				}
 			}
-			
 		}
 		//----------------------------------------
 
@@ -119,6 +151,18 @@ int main()
 		window.draw(aniChar);
 
 		soldier.update(test.getMat());
+
+		for (int i{ 0 }; i < soldiers.size(); ++i) {
+			soldiers[i].update(test.getMat());
+			
+
+			aniChar.setTexture(soldiers[i].getTex());
+			aniRect.left = soldiers[i].getSheetX() * 32;
+			aniRect.top = soldiers[i].getSheetY() * 32;
+			aniChar.setTextureRect(aniRect);
+			aniChar.setPosition(soldiers[i].getX(), soldiers[i].getY());
+			window.draw(aniChar);
+		}
 
 		/*
 		if (ab % 20 == 0) {
