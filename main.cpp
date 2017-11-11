@@ -36,9 +36,32 @@ int main()
 	gui3.setOutlineColor(sf::Color(100, 150, 0));
 	gui3.setPosition(5, 650);
 
+	sf::Font font;
+	// Load it from a file
+	if (!font.loadFromFile("Content/Fonts/slkscr.ttf"))
+	{
+		cerr << "nigga that font aint right" << endl;
+	    // error...
+	}
+
+	sf::Text trumpSpeech;
+	trumpSpeech.setFont(font);
+	trumpSpeech.setString("We need to\nbuild a wall.\n Don't let those\ndirty immigrants get\ninside our country!");
+
+	trumpSpeech.setCharacterSize(24);
+	trumpSpeech.setFillColor(sf::Color::Red);
+
+		
+
 	//--------------------------------------
 
+	//TRUMP SPEECH
+	//--------------------------------------
 
+	
+	
+
+	//--------------------------------------
 
 
 	//TOWER HANDLING STUFF
@@ -229,6 +252,7 @@ int main()
 				window.draw(aniChar);
 
 
+<<<<<<< HEAD
 			
 		}
 
@@ -236,6 +260,8 @@ int main()
 		
 		if (escaped >= tooMany) {
 
+=======
+>>>>>>> origin/master
 		}
 		
 
@@ -279,9 +305,12 @@ int main()
 		//GUI
 		//--------------------------------------
 		
+		trumpSpeech.setPosition(aniTrump.getPosition().x, aniTrump.getPosition().y + 150);
+
 		window.draw(gui1);
 		window.draw(gui2);
 		window.draw(gui3);
+		window.draw(trumpSpeech);
 		//--------------------------------------
 
 
