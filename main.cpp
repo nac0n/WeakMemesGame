@@ -44,26 +44,19 @@ int main()
 	    // error...
 	}
 
+	//--------------------------------------
+	//TRUMP SPEECH
+	//--------------------------------------
+
 	sf::Text trumpSpeech;
 	trumpSpeech.setFont(font);
 	trumpSpeech.setString("We need to\nbuild a wall.\n Don't let those\ndirty immigrants get\ninside our country!");
 
 	trumpSpeech.setCharacterSize(24);
 	trumpSpeech.setFillColor(sf::Color::Red);
-
-		
-
-	//--------------------------------------
-
-	//TRUMP SPEECH
-	//--------------------------------------
-
-	
 	
 
 	//--------------------------------------
-
-
 	//TOWER HANDLING STUFF
 	//--------------------------------------
 	Matrix towerMat{ 30,20 };
@@ -106,8 +99,8 @@ int main()
 	soldier.setPosMat(test.getStartX(), test.getStartY());
 
 	int ab{ 0 };
+	
 	//--------------------------------------
-
 	//TRUMP TESTING
 	sf::Texture trump;
 	trump.loadFromFile("Content/spriteSheets/trumpfacesheet.png");

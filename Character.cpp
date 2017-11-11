@@ -5,7 +5,7 @@
 
 Character::Character(std::string conf)
 {
-	loadFile = conf;
+	//loadFile = conf;
 	std::ifstream confFile;
 	confFile.open(conf);
 
@@ -23,12 +23,18 @@ Character::Character(std::string conf)
 	confFile >> canAttack;
 	confFile >> canMove;
 
+	confFile >> damage;
+	confFile >> health;
+	confFile >> range;
+	confFile >> firerate;
+
 }
 
 
 
 void Character::update(Matrix mat)
 {
+
 	if (canMove && !moving) {
 		//Find new go
 		//std::cout << "Finding new go" << std::endl;
@@ -84,7 +90,7 @@ void Character::update(Matrix mat)
 
 
 	if (canAttack) {
-
+		
 	}
 
 

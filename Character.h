@@ -47,6 +47,10 @@ private:
 	int aniY{ 0 };
 	int aniStepX{ 0 };
 	int aniStepY{ 0 };
+	int damage{ 0 };
+	int health{ 0 };
+	float range{ 0 };
+	int firerate{ 0 };
 	int facing{ 0 }; //0 = up, 1 = right, 2 = down, 3 = left
 
 	std::string loadFile;
