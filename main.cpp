@@ -3,6 +3,7 @@
 #include "Maps.h"
 #include "Character.h"
 #include <chrono>
+#include <SFML/Audio.hpp>
 
 using namespace std;
 
@@ -111,6 +112,9 @@ int main()
 	//Timer for spawns
 	auto spawnTimer = std::chrono::high_resolution_clock::now();
 
+	//Timer for phases
+	auto phaseTimer = std::chrono::high_resolution_clock::now();
+
 	//Counter for waves
 	
 	int escaped{ 0 };
@@ -132,6 +136,15 @@ int main()
 	wave.close();
 	
 
+	sf::Music music;
+	if (!music.openFromFile("Content/Sound/music_mexican.ogg")) {
+
+	}
+	music.play();
+
+
+	bool buildPhase{ true };
+
     while (window.isOpen())
     {
 
@@ -143,43 +156,54 @@ int main()
                 window.close();
             }
         }
+		if (buildPhase) {
+			//Events
+			//----------------------------------------
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+				int mX = sf::Mouse::getPosition(window).x;
+				int mY = sf::Mouse::getPosition(window).y;
 
-		//Events
-		//----------------------------------------
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-			int mX = sf::Mouse::getPosition(window).x;
-			int mY = sf::Mouse::getPosition(window).y;
+				mX /= (int)(32 * (((double)window.getSize().x) / ((double)1280)));
+				mY /= (int)(32 * (((double)window.getSize().y) / ((double)720)));
 
-			mX /= (int)(32 * (((double)window.getSize().x) / ((double)1280)));
-			mY /= (int)(32 * (((double)window.getSize().y) / ((double)720)));
+				if (test.getMat().at(mX, mY) == 0 && towerMat.at(mX, mY) == 0) {
+					towerMat.at(mX, mY) = 1;
+					Character tmp("Data/soldier.txt");
+					tmp.setPosMat(mX, mY);
+					soldiers.push_back(tmp);
+				}
 
-			if (test.getMat().at(mX, mY) == 0 && towerMat.at(mX, mY) == 0) {
-				towerMat.at(mX, mY) = 1;
-				Character tmp("Data/soldier.txt");
-				tmp.setPosMat(mX, mY);
-				soldiers.push_back(tmp);
 			}
-			
-			
+			auto endTime = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double, std::milli> elapsed = endTime - phaseTimer;
+
+			if ((int)elapsed.count() >= 10000) {
+				buildPhase = false;
+			}
+
+			//----------------------------------------
 		}
-		//----------------------------------------
+		else {
+			auto endTime = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double, std::milli> elapsedTime = endTime - spawnTimer;
 
-		auto endTime = std::chrono::high_resolution_clock::now();
-		std::chrono::duration<double, std::milli> elapsedTime = endTime - spawnTimer;
+			auto elapsed = (int)elapsedTime.count();
 
-		auto elapsed = (int)elapsedTime.count();
+
+			//SPAWNING THE MEHICANS
+			//----------------------------------------
+			if (elapsed % 200 == 0 && spawned < currentWave[curWave]) {
+				Character tmp("Data/mexican.txt");
+				tmp.setPosMat(test.getStartX(), test.getStartY());
+				mehicans.push_back(tmp);
+				spawnTimer = std::chrono::high_resolution_clock::now();
+				spawned++;
+			}
+			//----------------------------------------
+		}
+		
 
 		
-		//SPAWNING THE MEHICANS
-		//----------------------------------------
-		if (elapsed % 200 == 0 && spawned < currentWave[curWave]) {
-			Character tmp("Data/mexican.txt");
-			tmp.setPosMat(test.getStartX(), test.getStartY());
-			mehicans.push_back(tmp);
-			spawnTimer = std::chrono::high_resolution_clock::now();
-			spawned++;
-		}
-		//----------------------------------------
 
         window.clear();
 
@@ -204,14 +228,6 @@ int main()
 
 		//CHARACTERS
 		//----------------------------------------
-		aniChar.setTexture(soldier.getTex());
-		aniRect.left = soldier.getSheetX() * 32;
-		aniRect.top = soldier.getSheetY() * 32;
-		aniChar.setTextureRect(aniRect);
-		aniChar.setPosition(soldier.getX(), soldier.getY());
-		window.draw(aniChar);
-
-		soldier.update(test.getMat());
 
 		for (int i{ 0 }; i < soldiers.size(); ++i) {
 			soldiers[i].update(test.getMat());
@@ -229,11 +245,17 @@ int main()
 			mehicans[i].update(test.getMat());
 
 			//MEHICAN GOT THROUGH, WHAT ARE YOU EVEN DOING?!
-			if (mehicans[i].getStartX() == test.getEndX() && mehicans[i].getStartY() == test.getEndY()) {
+			int sX = mehicans[i].getStartX();
+			int sY = mehicans[i].getStartY();
+
+			if ((sX == test.getEndX()) && (sY == test.getEndY()) && mehicans[i].getGone() == false) {
 				mehicans[i].setGone(true);
+				cout << i << endl;
 				escaped++;
+				gone++;
 			}
-			
+
+			//cout << mehicans[i].getStartX() << " : " << mehicans[i].getStartY() << endl;
 
 			aniChar.setTexture(mehicans[i].getTex());
 			aniRect.left = mehicans[i].getSheetX() * 32;
@@ -251,6 +273,16 @@ int main()
 
 		//END THE GAME YOU FUCKING ARYAN FAILURE
 		
+		if (gone == currentWave[curWave]) {
+			cout << gone << " : " << currentWave[curWave] << " : " << curWave << endl;
+			buildPhase = true;
+			phaseTimer = std::chrono::high_resolution_clock::now();
+			gone = 0;
+			curWave++;
+			spawned = 0;
+			mehicans.clear();
+		}
+
 		if (escaped >= tooMany) {
 
 
