@@ -1,3 +1,4 @@
+
 #include <string>
 #include <SFML/Graphics.hpp>
 #pragma once
@@ -5,6 +6,7 @@
 #define CHARACHER_H
 
 class Character {
+
 
 public:
 	Character(std::string conf);
