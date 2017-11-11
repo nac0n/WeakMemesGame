@@ -27,6 +27,8 @@ public:
 
 	void setPosMat(int x, int y) { startX = goX = x; startY = goY = y; this->x = startX * 32; this->y = startY * 32; };
 
+	bool getGone() { return gone; };
+	void setGone(bool a) { gone = a; };
 
 	sf::Texture& getTex() { return sheet; };
 
@@ -56,6 +58,8 @@ private:
 
 	int moveX{ 0 };
 	int moveY{ 0 };
+
+	bool gone{ false };
 };
 
 #endif

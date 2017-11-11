@@ -23,7 +23,8 @@ Maps::Maps(std::string a)
 	mapFile >> endX;
 	mapFile >> endY;
 
-
+	cout << endX << " : " << endY << endl;
+	
 	Matrix tmp(x, y);
 
 	mat = tmp;

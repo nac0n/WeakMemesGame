@@ -58,7 +58,7 @@ int main()
     
 	Maps test{ "map1.txt" };
 	
-	std::vector<Character> charList;
+	
 
 	cout << test.getX() << " : " << test.getY() << endl;
 
@@ -67,6 +67,7 @@ int main()
 
 	//TEST FOR ANIMATION, REMOVE AFTERWARDS
 	//--------------------------------------
+
 	sf::Texture sheet;
 
 	if (!sheet.loadFromFile("Content/spriteSheets/soldierbigsheet.png")) {
@@ -90,8 +91,30 @@ int main()
 	sf::IntRect rectTrump(0, 0, 128, 128);
 	sf::Sprite aniTrump(trump, rectTrump);
 
+
 	//Timer for spawns
 	auto spawnTimer = std::chrono::high_resolution_clock::now();
+
+	//Counter for waves
+	
+	int escaped{ 0 };
+	const int tooMany{ 50 };
+	int gone{ 0 };
+	int spawned{ 0 };
+	int currentWave[10];
+	int curWave{ 0 };
+
+	
+	ifstream wave;
+	wave.open("waves1.txt");
+	if (!wave) {
+		perror("Fuck: ");
+	}
+	for (int i{ 0 }; i < 10; ++i)
+		wave >> currentWave[i];
+
+	wave.close();
+	
 
     while (window.isOpen())
     {
@@ -133,11 +156,12 @@ int main()
 		
 		//SPAWNING THE MEHICANS
 		//----------------------------------------
-		if (elapsed % 200 == 0) {
+		if (elapsed % 200 == 0 && spawned < currentWave[curWave]) {
 			Character tmp("Data/mexican.txt");
 			tmp.setPosMat(test.getStartX(), test.getStartY());
 			mehicans.push_back(tmp);
 			spawnTimer = std::chrono::high_resolution_clock::now();
+			spawned++;
 		}
 		//----------------------------------------
 
@@ -187,7 +211,12 @@ int main()
 
 		for (int i{ 0 }; i < mehicans.size(); ++i) {
 			mehicans[i].update(test.getMat());
-			
+
+			//MEHICAN GOT THROUGH, WHAT ARE YOU EVEN DOING?!
+			if (mehicans[i].getStartX() == test.getEndX() && mehicans[i].getStartY() == test.getEndY()) {
+				mehicans[i].setGone(true);
+				escaped++;
+			}
 			
 
 			aniChar.setTexture(mehicans[i].getTex());
@@ -195,11 +224,20 @@ int main()
 			aniRect.top = mehicans[i].getSheetY() * 32;
 			aniChar.setTextureRect(aniRect);
 			aniChar.setPosition(mehicans[i].getX(), mehicans[i].getY());
-			window.draw(aniChar);
+			
+			if(mehicans[i].getGone() == false)
+				window.draw(aniChar);
 
 
-			mehicans.clear();
+			
 		}
+
+		//END THE GAME YOU FUCKING ARYAN FAILURE
+		
+		if (escaped >= tooMany) {
+
+		}
+		
 
 		/*
 		if (ab % 20 == 0) {
