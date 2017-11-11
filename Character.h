@@ -41,7 +41,7 @@ private:
 	int aniY{ 0 };
 	int aniStepX{ 0 };
 	int aniStepY{ 0 };
-
+	int facing{ 0 }; //0 = up, 1 = right, 2 = down, 3 = left
 
 
 	bool canAttack{ false };

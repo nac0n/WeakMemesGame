@@ -40,6 +40,8 @@ void Character::update(Matrix mat)
 			goY -= 1;
 			moveX = 0;
 			moveY = -1;
+			facing = 0;
+			
 		}
 		else if (mat.at(goX + 1, goY) == 1 && goX+1 != startX) {
 			//Right
@@ -48,6 +50,7 @@ void Character::update(Matrix mat)
 			goX += 1;
 			moveX = 1;
 			moveY = 0;
+			facing = 1;
 		}
 		else if (mat.at(goX, goY + 1) == 1 && goY+1 != startY) {
 			//Down
@@ -56,6 +59,7 @@ void Character::update(Matrix mat)
 			goY += 1;
 			moveX = 0;
 			moveY = 1;
+			facing = 2;
 		}
 		else if (mat.at(goX - 1, goY) == 1 && goX-1 != startX) {
 			//Left
@@ -64,6 +68,7 @@ void Character::update(Matrix mat)
 			goX -= 1;
 			moveX = -1;
 			moveY = 0;
+			facing = 3;
 		}
 
 		moving = true;
@@ -98,6 +103,6 @@ void Character::update(Matrix mat)
 
 	++counter;
 
-
+	aniY = facing*2;
 
 }
