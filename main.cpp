@@ -15,6 +15,15 @@ int main()
 	tile0.setFillColor(sf::Color::Green);
 	tile1.setFillColor(sf::Color::Yellow);
 
+	//GUI
+	//--------------------------------------
+	sf::RectangleShape gui1(sf::Vector2f(955, 635));
+	gui1.setFillColor(sf::Color::Transparent);
+	gui1.setOutlineThickness(5);
+	gui1.setOutlineColor(sf::Color(250, 150, 100));
+	//--------------------------------------
+
+
 	sf::RectangleShape(sf::Vector2f(32,32));
     shape.setFillColor(sf::Color::Green);
     
@@ -129,6 +138,13 @@ int main()
 		aniTrump.setPosition(1000, 50);
 		window.draw(aniTrump);
 		//----------------------------------------
+
+		//GUI
+		//--------------------------------------
+		gui1.setPosition(5, 5);
+		window.draw(gui1);
+
+		//--------------------------------------
 
 
         //window.draw(shape);
