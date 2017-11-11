@@ -1,6 +1,5 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include <SFML/Text.hpp>
 #include "Maps.h"
 #include "Character.h"
 
@@ -49,15 +48,7 @@ int main()
 	cout << test.getX() << " : " << test.getY() << endl;
 
 	//TRUMP SPEECH TEST
-	sf::Text trumpText;
-	sf::Font font;
-	if (!font.loadFromFile("arial.ttf"))
-	{
-		cerr << "Fakku desu yo ne!" << endl;
-	    // error...
-	}
 
-	trumpText.
 
 	//TEST FOR ANIMATION, REMOVE AFTERWARDS
 	//--------------------------------------

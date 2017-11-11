@@ -103,6 +103,6 @@ void Character::update(Matrix mat)
 
 	++counter;
 
-	aniY = facing*2;
+	aniY = facing;
 
 }
