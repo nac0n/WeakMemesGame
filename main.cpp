@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(960, 640), "MTD: GA 3");
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "MTD: GA 3");
     sf::CircleShape shape(100.f);
 
 	sf::RectangleShape tile0(sf::Vector2f(32, 32));
@@ -22,7 +22,7 @@ int main()
 	
 	std::vector<Character> charList;
 
-
+	cout << test.getX() << " : " << test.getY() << endl;
 	//TEST FOR ANIMATION, REMOVE AFTERWARDS
 	//--------------------------------------
 	sf::Texture sheet;
@@ -42,6 +42,12 @@ int main()
 	int ab{ 0 };
 	//--------------------------------------
 
+	//TRUMP TESTING
+	sf::Texture trump;
+	trump.loadFromFile("Content/spriteSheets/trumpfacesheet.png");
+	sf::IntRect rectTrump(0, 0, 128, 128);
+	sf::Sprite aniTrump(trump, rectTrump);
+
     while (window.isOpen())
     {
 
@@ -60,7 +66,7 @@ int main()
 		//MAP
 		//----------------------------------------
 		for (int i{ 0 }; i < test.getX(); ++i) {
-			for (int j{ 0 }; j < test.getX(); ++j) {
+			for (int j{ 0 }; j < test.getY(); ++j) {
 				if (test.getMat().at(i, j) == 0) {
 					tile0.setPosition(i * 32, j * 32);
 					window.draw(tile0);
@@ -104,7 +110,24 @@ int main()
 				aniRect.top = 0;
 		}
 		*/
-		//ab++;
+		
+		//----------------------------------------
+
+		//TRUMP
+		//----------------------------------------
+		if (ab % 40 == 0) {
+			if (rectTrump.left == 128) {
+				rectTrump.left = 0;
+			}
+			else {
+				rectTrump.left = 128;
+			}
+		}
+		
+		ab++;
+		aniTrump.setTextureRect(rectTrump);
+		aniTrump.setPosition(1000, 50);
+		window.draw(aniTrump);
 		//----------------------------------------
 
 
