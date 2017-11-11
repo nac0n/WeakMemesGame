@@ -15,6 +15,9 @@ public:
 	int getX() { return x; }
 	int getY() { return y; }
 
+	int getStartX() { return startX; };
+	int getStartY() { return startY; };
+
 	Matrix getMat() { return mat; }
 
 	void draw(sf::RenderWindow* window);
