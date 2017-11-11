@@ -1,7 +1,6 @@
 #include "Maps.h"
 #include <iostream>
 
-
 using namespace std;
 
 Maps::Maps(std::string a)
