@@ -252,7 +252,7 @@ int main()
 				window.draw(aniChar);
 
 
-<<<<<<< HEAD
+
 			
 		}
 
@@ -260,8 +260,7 @@ int main()
 		
 		if (escaped >= tooMany) {
 
-=======
->>>>>>> origin/master
+
 		}
 		
 
