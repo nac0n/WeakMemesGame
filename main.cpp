@@ -22,6 +22,20 @@ int main()
 	gui1.setFillColor(sf::Color::Transparent);
 	gui1.setOutlineThickness(5);
 	gui1.setOutlineColor(sf::Color(250, 150, 100));
+	gui1.setPosition(5, 5);
+
+	sf::RectangleShape gui2(sf::Vector2f(305, 635));
+	gui2.setFillColor(sf::Color::Transparent);
+	gui2.setOutlineThickness(5);
+	gui2.setOutlineColor(sf::Color(100, 150, 100));
+	gui2.setPosition(970, 5);
+
+	sf::RectangleShape gui3(sf::Vector2f(1270, 65));
+	gui3.setFillColor(sf::Color::Transparent);
+	gui3.setOutlineThickness(5);
+	gui3.setOutlineColor(sf::Color(100, 150, 0));
+	gui3.setPosition(5, 650);
+
 	//--------------------------------------
 
 
@@ -58,7 +72,7 @@ int main()
 
 	aniChar.setPosition(200, 200);
 
-	Character soldier{ "Data/soldier.txt" };
+	Character soldier{ "Data/mexican.txt" };
 	soldier.setPosMat(test.getStartX(), test.getStartY());
 
 	int ab{ 0 };
@@ -137,26 +151,27 @@ int main()
 
 		//TRUMP
 		//----------------------------------------
-		if (ab % 40 == 0) {
-			if (rectTrump.left == 128) {
+		if (ab % 30 == 0) {
+			if (rectTrump.left == 384) {
 				rectTrump.left = 0;
 			}
 			else {
-				rectTrump.left = 128;
+				rectTrump.left += 128;
 			}
 		}
 		
 		ab++;
 		aniTrump.setTextureRect(rectTrump);
-		aniTrump.setPosition(1000, 50);
+		aniTrump.setPosition(970, 5);
 		window.draw(aniTrump);
 		//----------------------------------------
 
 		//GUI
 		//--------------------------------------
-		gui1.setPosition(5, 5);
+		
 		window.draw(gui1);
-
+		window.draw(gui2);
+		window.draw(gui3);
 		//--------------------------------------
 
 

@@ -1,5 +1,5 @@
 Content/spriteSheets/soldierbigsheet.png
 1
 6
-0
 1
+0
