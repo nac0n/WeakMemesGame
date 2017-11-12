@@ -65,9 +65,11 @@ int main()
 	}
 
 	//--------------------------------------
+	
 	//TRUMP SPEECH
 	//--------------------------------------
 
+	//TRUMP TEXT
 	sf::Text trumpSpeech;
 	trumpSpeech.setFont(font);
 	trumpSpeech.setString("We need to\nbuild a wall.\n Don't let those\ndirty immigrants get\ninside our country!");
@@ -75,8 +77,32 @@ int main()
 	trumpSpeech.setCharacterSize(24);
 	trumpSpeech.setFillColor(sf::Color::Red);
 	
+	//TRUMP ANIMATION
+	sf::Texture trump;
+	trump.loadFromFile("Content/spriteSheets/trumpfacesheet.png");
+	sf::IntRect rectTrump(0, 0, 128, 128);
+	sf::Sprite aniTrump(trump, rectTrump);
+	
+
+	//Positions for Portrait & Text
+	aniTrump.setPosition(970, 5);
+	trumpSpeech.setPosition(aniTrump.getPosition().x, aniTrump.getPosition().y + 150);
+	
+	
+	//AMERICAN FLAG
+	sf::Texture flag;
+	if (!flag.loadFromFile("Content/spriteSheets/americanflag.png")) {
+		cerr << "couldn't load flag" << endl;
+	}
+
+	sf::IntRect flagRect(0, 0, 128, 75);
+
+	sf::Sprite aniFlag{ flag, flagRect};
+	aniFlag.setPosition(aniTrump.getPosition().x, 7);
 
 	//--------------------------------------
+
+
 	//TOWER HANDLING STUFF
 	//--------------------------------------
 	Matrix towerMat{ 30,20 }; //Matrix that keeps a check on all the soldiers for building
@@ -122,11 +148,7 @@ int main()
 	int ab{ 0 };
 	
 	//--------------------------------------
-	//TRUMP TESTING
-	sf::Texture trump;
-	trump.loadFromFile("Content/spriteSheets/trumpfacesheet.png");
-	sf::IntRect rectTrump(0, 0, 128, 128);
-	sf::Sprite aniTrump(trump, rectTrump);
+	
 
 
 	//Timer for spawns
@@ -374,19 +396,21 @@ int main()
 		
 		ab++;
 		aniTrump.setTextureRect(rectTrump);
-		aniTrump.setPosition(970, 5);
+		
+		window.draw(aniFlag);
 		window.draw(aniTrump);
+		
+		window.draw(trumpSpeech);
 		//----------------------------------------
 
 		//GUI
 		//--------------------------------------
 		
-		trumpSpeech.setPosition(aniTrump.getPosition().x, aniTrump.getPosition().y + 150);
+		
 
 		window.draw(gui1);
 		window.draw(gui2);
 		window.draw(gui3);
-		window.draw(trumpSpeech);
 		//--------------------------------------
 
 
