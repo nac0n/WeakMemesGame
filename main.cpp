@@ -463,17 +463,24 @@ int main()
 
 			if (curWave == 10) {
 				mapCounter++;
-				std::string nextMap{ "map" + mapCounter };
+				std::string tmp{"map"};
+				tmp += std::to_string(mapCounter);
+				tmp += ".txt";
+
+				cout << tmp << endl;
+				std::string nextMap{ tmp };
 				test = Maps{ nextMap };
 
-
+				cout << "Next map" << endl;
 
 				curWave = 0;
 				towerMat.fillWith(0);
+				soldiers.clear();
 				maxTowers = 0;
 				current_currency = 300;
 				currencyValueText.setString(to_string(current_currency));
 				spawnCD = 800;
+				
 			}
 		}
 
