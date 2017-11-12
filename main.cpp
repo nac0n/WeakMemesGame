@@ -37,6 +37,13 @@ int main()
 	sf::Sprite tile1(tex2);
 	sf::Sprite tile2(tex3);
 
+	//GAME LOGIC VARIABLES
+	//--------------------------------------
+	int current_currency = 200;
+
+
+	//--------------------------------------
+	
 	//GUI
 	//--------------------------------------
 	sf::RectangleShape gui1(sf::Vector2f(955, 635));
@@ -73,22 +80,48 @@ int main()
 	//TRUMP TEXT
 	sf::Text trumpSpeech;
 	trumpSpeech.setFont(font);
-	trumpSpeech.setString("We need to\nbuild a wall.\n Don't let those\ndirty immigrants get\ninside our country!");
-
-	trumpSpeech.setCharacterSize(24);
+	trumpSpeech.setString("We need to\nbuild a wall.\n Keep those\ndirty immigrants out\nuntil we're done!");
+	trumpSpeech.setCharacterSize(22);
 	trumpSpeech.setFillColor(sf::Color::Red);
-	
+
+	//INFORMATION GUI
+	sf::Text currencyValueTextLabel;
+	currencyValueTextLabel.setFont(font);
+	currencyValueTextLabel.setString("Dollars: ");
+	currencyValueTextLabel.setCharacterSize(16);
+	currencyValueTextLabel.setFillColor(sf::Color::White);
+
+	sf::Text currencyValueText;
+	currencyValueText.setFont(font);
+	currencyValueText.setCharacterSize(16);
+	currencyValueText.setFillColor(sf::Color::White);
+
+	sf::Text mexicansLeftLabel;
+	mexicansLeftLabel.setFont(font);
+	mexicansLeftLabel.setString("Meheecans left: ");
+	mexicansLeftLabel.setCharacterSize(16);
+	mexicansLeftLabel.setFillColor(sf::Color::Green);
+
+	sf::Text mexicansLeftCounter;
+	mexicansLeftCounter.setFont(font);
+	mexicansLeftCounter.setCharacterSize(16);
+	mexicansLeftCounter.setFillColor(sf::Color::Green);
+
 	//TRUMP ANIMATION
 	sf::Texture trump;
 	trump.loadFromFile("Content/spriteSheets/trumpfacesheet.png");
 	sf::IntRect rectTrump(0, 0, 128, 128);
 	sf::Sprite aniTrump(trump, rectTrump);
-	
 
+
+	
 	//Positions for Portrait & Text
 	aniTrump.setPosition(970, 5);
-	trumpSpeech.setPosition(aniTrump.getPosition().x, aniTrump.getPosition().y + 150);
-	
+	trumpSpeech.setPosition(aniTrump.getPosition().x + 5, aniTrump.getPosition().y + 150);
+	currencyValueTextLabel.setPosition(aniTrump.getPosition().x + 5, aniTrump.getPosition().y + 300);
+	currencyValueText.setPosition(currencyValueTextLabel.getPosition().x + 100, aniTrump.getPosition().y + 300);
+	mexicansLeftLabel.setPosition(aniTrump.getPosition().x + 5, aniTrump.getPosition().y + 350);
+	mexicansLeftCounter.setPosition(mexicansLeftLabel.getPosition().x + 170, aniTrump.getPosition().y + 350);
 	
 	//AMERICAN FLAG
 	sf::Texture flag;
@@ -168,7 +201,8 @@ int main()
 	int currentWave[10];
 	int curWave{ 0 };
 
-	
+	//currentWave[curewave] - gone
+
 	ifstream wave;
 	wave.open("waves1.txt");
 	if (!wave) {
@@ -195,8 +229,6 @@ int main()
 
     while (window.isOpen())
     {
-
-		
 
         sf::Event event;
         while (window.pollEvent(event))
@@ -227,7 +259,7 @@ int main()
 			auto endTime = std::chrono::high_resolution_clock::now();
 			std::chrono::duration<double, std::milli> elapsed = endTime - phaseTimer;
 
-			if ((int)elapsed.count() >= 2000) {
+			if ((int)elapsed.count() >= 4000) {
 				buildPhase = false;
 			}
 
@@ -321,6 +353,8 @@ int main()
 							if(mehicans[m].getHealth() <= 0) {
 								mehicans[m].setGone(true);
 								gone += 1;
+								current_currency += mehicans[m].getCurrencyValue();
+								cout << current_currency << endl;
 							}
 
 							
@@ -435,6 +469,10 @@ int main()
 		window.draw(aniTrump);
 		
 		window.draw(trumpSpeech);
+		window.draw(currencyValueTextLabel);
+		window.draw(currencyValueText);
+		window.draw(mexicansLeftLabel);
+		window.draw(mexicansLeftCounter);
 		//----------------------------------------
 
 		//GUI

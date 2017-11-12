@@ -38,6 +38,8 @@ public:
 	bool getAttackCooldown() { return attackCooldown; };
 	void setAttackCooldown(bool setBool) {attackCooldown = setBool;};
 
+	int getCurrencyValue() {return currency_value;};
+
 	int getCooldownTimer() { return cooldownTimer;};
 	void setCooldownTimer(int newTimerValue) { cooldownTimer = newTimerValue;};
 
@@ -64,6 +66,7 @@ private:
 	int firerate{ 0 };
 	int facing{ 0 }; //0 = up, 1 = right, 2 = down, 3 = left
 	int cooldownTimer {0};
+	int currency_value {40};
 
 	std::string loadFile;
 
