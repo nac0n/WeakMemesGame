@@ -124,7 +124,8 @@ int main()
 	int mapCounter{ 1 };
 	
 
-	cout << test.getX() << " : " << test.getY() << endl;
+	//cout << test.getX() << " : " << test.getY() << endl;
+	//cout << test.getStartX() << " : " << test.getStartY() << endl;
 
 	//TRUMP SPEECH TEST
 
@@ -183,13 +184,19 @@ int main()
 	if (!music.openFromFile("Content/Sound/music_mexican.ogg")) {
 
 	}
+	music.setLoop(true);
 	music.play();
 
 
 	bool buildPhase{ true };
 
+	auto gameTimer = std::chrono::high_resolution_clock::now();
+
+
     while (window.isOpen())
     {
+
+		
 
         sf::Event event;
         while (window.pollEvent(event))
@@ -235,7 +242,7 @@ int main()
 
 			//SPAWNING THE MEHICANS
 			//----------------------------------------
-			if (elapsed % 200 == 0 && spawned < currentWave[curWave]) {
+			if (elapsed > 800 && spawned < currentWave[curWave]) {
 				Character tmp("Data/mexican.txt");
 				tmp.setPosMat(test.getStartX(), test.getStartY());
 				mehicans.push_back(tmp);
@@ -258,10 +265,16 @@ int main()
 				if (test.getMat().at(i, j) == 0) {
 					tile0.setPosition(i * 32, j * 32);
 					window.draw(tile0);
+
+					if (i == test.getStartX() && j == test.getStartY()) {
+						tile1.setPosition(i * 32, j * 32);
+						window.draw(tile1);
+					}
 				}
 				else if (test.getMat().at(i, j) == 1) {
 					tile1.setPosition(i * 32, j * 32);
 					window.draw(tile1);
+					
 				}
 				else if (test.getMat().at(i, j) == 2) {
 					tile0.setPosition(i * 32, j * 32);
@@ -437,6 +450,17 @@ int main()
 
         //window.draw(shape);
         window.display();
+
+		//Game Delay
+		while (true) {
+			auto endTime = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double, std::milli> elapsed = endTime - gameTimer;
+			if ((int)elapsed.count() > 3) {
+				gameTimer = std::chrono::high_resolution_clock::now();
+				break;
+			}
+		}
+
     }
 
     return 0;

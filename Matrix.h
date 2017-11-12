@@ -22,6 +22,7 @@ private:
 	int* a{ nullptr };
 	int width{ 0 };
 	int height{ 0 };
+	int zeroCheck{ 0 };
 };
 
 #endif
