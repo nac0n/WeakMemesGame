@@ -265,20 +265,21 @@ int main()
 			aniChar.setTextureRect(aniRect);
 			aniChar.setPosition(soldiers[i].getX(), soldiers[i].getY());
 			window.draw(aniChar);
-
+			/*
 			for(int m{0}; m < mehicans.size(); ++m) 
 			{
-				if(!mehicans[i].gone()) 
+				if(!mehicans[i].getGone()) 
 				{
-					if(soldier[i].hasInRange(mehicans[i])) 
+					if(soldiers[i].hasInRange(mehicans[i])) 
 					{
-						soldier[i].shootOnce(mehicans[i]);
+						soldiers[i].shootOnce(mehicans[i]);
 						break;
 
 						//break is needed to not shoot more than one mexican
 					}	
 				}
 			}
+			*/
 		}
 
 		for (int i{ 0 }; i < mehicans.size(); ++i) {

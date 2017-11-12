@@ -109,6 +109,7 @@ void Character::update(Matrix mat)
 	aniY = facing;
 
 }
+/*
 bool Character::hasInRange(Character mexican) {
 	if(canAttack) 
 	{
@@ -122,6 +123,6 @@ bool Character::hasInRange(Character mexican) {
 void Character::shootOnce(Character mexican) {
 
 }
-
+*/
 
 
