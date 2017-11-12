@@ -16,13 +16,15 @@ public:
 	void update(Matrix mat);
 	bool hasInRange(Character mexican);
 	float calculatedDistance(Character mexican);
-	void shootOnce(Character mexican);
-
+	void shoot(Character mexican);
 	int getSheetX() { return aniX; };
 	int getSheetY() { return aniY; };
 
 	int getX() { return x; };
 	int getY() { return y; };
+
+	int getHealth() { return health;};
+	int setHealth(int newHealth) { health = newHealth;};
 
 	int getStartX() { return startX; };
 	int getStartY() { return startY; };
@@ -31,6 +33,12 @@ public:
 
 	bool getGone() { return gone; };
 	void setGone(bool a) { gone = a; };
+
+	bool getAttackCooldown() { return attackCooldown; };
+	bool setAttackCooldown(bool setBool) {attackCooldown = setBool;};
+
+	int getCooldownTimer() { return cooldownTimer;};
+	int setCooldownTimer(int newTimerValue) { cooldownTimer = newTimerValue;};
 
 	sf::Texture& getTex() { return sheet; };
 
@@ -54,9 +62,11 @@ private:
 	float range{ 0 };
 	int firerate{ 0 };
 	int facing{ 0 }; //0 = up, 1 = right, 2 = down, 3 = left
+	int cooldownTimer {0};
 
 	std::string loadFile;
 
+	bool attackCooldown {false};
 	bool canAttack{ false };
 	bool canMove{ false };
 	bool moving{ false };

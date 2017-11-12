@@ -4,6 +4,7 @@
 #include "Character.h"
 #include <chrono>
 #include <SFML/Audio.hpp>
+#include <cmath>
 
 using namespace std;
 
@@ -290,15 +291,36 @@ int main()
 			
 			for(int m{0}; m < mehicans.size(); ++m) 
 			{
-				if(!mehicans[i].getGone()) 
+				if(mehicans[m].getGone() == false) 
 				{
-					if(soldiers[i].hasInRange(mehicans[i])) 
+
+					if(soldiers[i].hasInRange(mehicans[m])) 
 					{
-						soldiers[i].shootOnce(mehicans[i]);
+						//soldiers[i].shoot(mehicans[m]);
+
+						//cout << soldiers[i].getAttackCooldown() << endl;
+
+						if(mehicans[m].getHealth() > 0 && soldiers[i].getAttackCooldown() == false) {
+
+							mehicans[m].setHealth(mehicans[m].getHealth() -1);
+							//cout << mehicans[m].getHealth() << endl;
+
+							if(mehicans[m].getHealth() <= 0) {
+								mehicans[m].setGone(true);
+								gone += 1;
+							}
+
+							
+							soldiers[i].setAttackCooldown(true);
+							cout << soldiers[i].getAttackCooldown() << endl;
+						}
+						
 						break;
 						//break is needed to not shoot more than one mexican
-					}	
+					}
+					
 				}
+				
 			}
 			
 		}

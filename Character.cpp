@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <cmath>
 
 Character::Character(std::string conf)
 {
@@ -12,6 +13,7 @@ Character::Character(std::string conf)
 	std::string fileName;
 
 	std::getline(confFile, fileName);
+	int cooldownTimer;
 
 	if (!sheet.loadFromFile(fileName)) {
 		std::cerr << "Error loading sprite" << std::endl;
@@ -43,7 +45,6 @@ void Character::update(Matrix mat)
 				goY -= 1;
 				moveX = 0;
 				moveY = -1;
-
 
 		}
 		else if (mat.at(goX + 1, goY) == 1 && goX+1 != startX) {
@@ -85,10 +86,15 @@ void Character::update(Matrix mat)
 			moving = false;
 		}
 	}
+	//std::cout << "Hej" << std::endl;
+	if (canAttack && getAttackCooldown()) {
 
-
-	if (canAttack) {
-
+		setCooldownTimer(getCooldownTimer() + 1);
+		//cooldownTimer += 1;
+		if(getCooldownTimer() >= 220) {
+			setAttackCooldown(false);
+			setCooldownTimer(0);
+		}
 	}
 
 
@@ -111,24 +117,22 @@ void Character::update(Matrix mat)
 }
 
 bool Character::hasInRange(Character mexican) {
-	if(calculatedDistance(mexican) >= range)
+	if(calculatedDistance(mexican) <= range)
 	{
 		return true;
 	}
 	return false;
 }
 
-float calculatedDistance(Character mexican) {
-	sf::Vector2f mexVect(mexican.getX(), mexican.getY());
-	int tempx = getX();
-	sf::Vector2f soldierVect(getX(), getY());
-
-	return 0.f;
-
+float Character::calculatedDistance(Character mexican) {
+	float f = sqrt(pow((mexican.x-x),2)+pow((mexican.y-y),2));
+	return f;
 }
 
-void Character::shootOnce(Character mexican) {
+/*void Character::shoot(Character mexican) {
+	mexican.setHealth(0);
 
-}
+	std::cout << mexican.getHealth() << std::endl;
+}*/
 
 
