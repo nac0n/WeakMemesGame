@@ -82,7 +82,7 @@ int main()
 	trumpSpeech.setFont(font);
 	trumpSpeech.setString("We need to\nbuild a wall.\n Keep those\ndirty immigrants out\nuntil we're done!");
 	trumpSpeech.setCharacterSize(22);
-	trumpSpeech.setFillColor(sf::Color::Red);
+	trumpSpeech.setFillColor(sf::Color::White);
 
 	//INFORMATION GUI
 	sf::Text currencyValueTextLabel;
@@ -108,6 +108,20 @@ int main()
 	mexicansLeftCounter.setCharacterSize(16);
 	mexicansLeftCounter.setFillColor(sf::Color::Green);
 
+
+	sf::Text mexicansEscapedCounterLabel;
+	mexicansEscapedCounterLabel.setFont(font);
+	mexicansEscapedCounterLabel.setString("Meheecans escaped: ");
+	mexicansEscapedCounterLabel.setCharacterSize(16);
+	mexicansEscapedCounterLabel.setFillColor(sf::Color::Red);
+
+	sf::Text mexicansEscapedCounter;
+	mexicansEscapedCounter.setFont(font);
+	mexicansEscapedCounter.setCharacterSize(16);
+	mexicansEscapedCounter.setFillColor(sf::Color::Red);
+
+
+
 	//TRUMP ANIMATION
 	sf::Texture trump;
 	trump.loadFromFile("Content/spriteSheets/trumpfacesheet.png");
@@ -121,9 +135,13 @@ int main()
 	trumpSpeech.setPosition(aniTrump.getPosition().x + 5, aniTrump.getPosition().y + 150);
 	currencyValueTextLabel.setPosition(aniTrump.getPosition().x + 5, aniTrump.getPosition().y + 300);
 	currencyValueText.setPosition(currencyValueTextLabel.getPosition().x + 100, aniTrump.getPosition().y + 300);
+
 	mexicansLeftLabel.setPosition(aniTrump.getPosition().x + 5, aniTrump.getPosition().y + 350);
 	mexicansLeftCounter.setPosition(mexicansLeftLabel.getPosition().x + 170, aniTrump.getPosition().y + 350);
-	
+
+	mexicansEscapedCounterLabel.setPosition(aniTrump.getPosition().x + 5, aniTrump.getPosition().y + 400);
+	mexicansEscapedCounter.setPosition(mexicansEscapedCounterLabel.getPosition().x + 200, aniTrump.getPosition().y + 400);
+
 	//AMERICAN FLAG
 	sf::Texture flag;
 	if (!flag.loadFromFile("Content/spriteSheets/americanflag.png")) {
@@ -196,6 +214,7 @@ int main()
 	//Counter for waves
 	
 	int escaped{ 0 };
+	mexicansEscapedCounter.setString(to_string(escaped));
 	const int tooMany{ 50 };
 	int gone{ 0 };
 	int spawned{ 0 };
@@ -428,6 +447,7 @@ int main()
 				mehicans[i].setGone(true);
 				cout << i << endl;
 				escaped++;
+				mexicansEscapedCounter.setString(to_string(escaped));
 				gone++;
 			}
 
@@ -538,6 +558,9 @@ int main()
 		window.draw(currencyValueText);
 		window.draw(mexicansLeftLabel);
 		window.draw(mexicansLeftCounter);
+		window.draw(mexicansEscapedCounterLabel);
+		window.draw(mexicansEscapedCounter);
+		
 		//----------------------------------------
 
 		//GUI
