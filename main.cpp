@@ -105,7 +105,6 @@ int main()
 
 	sf::Text mexicansLeftCounter;
 	mexicansLeftCounter.setFont(font);
-	mexicansLeftCounter.setString("" + 0);
 	mexicansLeftCounter.setCharacterSize(16);
 	mexicansLeftCounter.setFillColor(sf::Color::Green);
 
@@ -274,7 +273,7 @@ int main()
 		else {
 			auto endTime = std::chrono::high_resolution_clock::now();
 			std::chrono::duration<double, std::milli> elapsedTime = endTime - spawnTimer;
-
+			mexicansLeftCounter.setString(to_string(currentWave[curWave] - gone));
 			auto elapsed = (int)elapsedTime.count();
 
 
@@ -394,6 +393,7 @@ int main()
 									gone += 1;
 									current_currency += mehicans[m].getCurrencyValue();
 									cout << current_currency << endl;
+									mexicansLeftCounter.setString(to_string(currentWave[curWave] - gone));
 									currencyValueText.setString(to_string(current_currency));
 
 								}
