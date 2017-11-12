@@ -12,10 +12,29 @@ int main()
     sf::RenderWindow window(sf::VideoMode(1280, 720), "MTD: GA 3");
     sf::CircleShape shape(100.f);
 
-	sf::RectangleShape tile0(sf::Vector2f(32, 32));
-	sf::RectangleShape tile1(sf::Vector2f(32, 32));
-	tile0.setFillColor(sf::Color::Green);
-	tile1.setFillColor(sf::Color::Yellow);
+	//sf::RectangleShape tile0(sf::Vector2f(32, 32));
+	//sf::RectangleShape tile1(sf::Vector2f(32, 32));
+	//tile0.setFillColor(sf::Color::Green);
+	//tile1.setFillColor(sf::Color::Yellow);
+
+	sf::Texture tex1;
+	if (!tex1.loadFromFile("Content/spriteSheets/grass.png")) {
+
+	}
+
+	sf::Texture tex2;
+	if (!tex2.loadFromFile("Content/spriteSheets/ground.png")) {
+
+	}
+
+	sf::Texture tex3;
+	if (!tex3.loadFromFile("Content/spriteSheets/staket.png")) {
+
+	}
+
+	sf::Sprite tile0(tex1);
+	sf::Sprite tile1(tex2);
+	sf::Sprite tile2(tex3);
 
 	//GUI
 	//--------------------------------------
@@ -60,10 +79,11 @@ int main()
 	//--------------------------------------
 	//TOWER HANDLING STUFF
 	//--------------------------------------
-	Matrix towerMat{ 30,20 };
+	Matrix towerMat{ 30,20 }; //Matrix that keeps a check on all the soldiers for building
 	towerMat.fillWith(0);
 	std::vector<Character> soldiers;
 	//--------------------------------------
+
 
 	//MEHICANS STUFF
 	//--------------------------------------
@@ -74,7 +94,7 @@ int main()
     shape.setFillColor(sf::Color::Green);
     
 	Maps test{ "map1.txt" };
-	
+	int mapCounter{ 1 };
 	
 
 	cout << test.getX() << " : " << test.getY() << endl;
@@ -177,7 +197,7 @@ int main()
 			auto endTime = std::chrono::high_resolution_clock::now();
 			std::chrono::duration<double, std::milli> elapsed = endTime - phaseTimer;
 
-			if ((int)elapsed.count() >= 10000) {
+			if ((int)elapsed.count() >= 2000) {
 				buildPhase = false;
 			}
 
@@ -219,6 +239,12 @@ int main()
 				else if (test.getMat().at(i, j) == 1) {
 					tile1.setPosition(i * 32, j * 32);
 					window.draw(tile1);
+				}
+				else if (test.getMat().at(i, j) == 2) {
+					tile0.setPosition(i * 32, j * 32);
+					window.draw(tile0);
+					tile2.setPosition(i * 32, j * 32);
+					window.draw(tile2);
 				}
 			}
 		}
@@ -295,6 +321,17 @@ int main()
 			curWave++;
 			spawned = 0;
 			mehicans.clear();
+
+			if (curWave == 10) {
+				mapCounter++;
+				std::string nextMap{ "map" + mapCounter };
+				test = Maps{ nextMap };
+
+
+
+				curWave = 0;
+				towerMat.fillWith(0);
+			}
 		}
 
 		if (escaped >= tooMany) {

@@ -36,15 +36,15 @@ void Character::update(Matrix mat)
 	if (canMove && !moving) {
 		//Find new go
 		//std::cout << "Finding new go" << std::endl;
-		if (mat.at(goX, goY - 1) == 1 && goY-1 != startY) {
-			//Up
-			startX = goX;
-			startY = goY;
-			goY -= 1;
-			moveX = 0;
-			moveY = -1;
-			
-			
+		if (mat.at(goX, goY - 1) == 1 && goY - 1 != startY && goY-1 >= 0) {
+				//Up
+				startX = goX;
+				startY = goY;
+				goY -= 1;
+				moveX = 0;
+				moveY = -1;
+
+
 		}
 		else if (mat.at(goX + 1, goY) == 1 && goX+1 != startX) {
 			//Right
