@@ -142,7 +142,8 @@ void Character::update(Matrix mat)
 
 	++counter;
 
-	aniY = facing;
+	if(canMove)
+		aniY = facing;
 
 }
 
