@@ -43,6 +43,8 @@ public:
 	int getCooldownTimer() { return cooldownTimer;};
 	void setCooldownTimer(int newTimerValue) { cooldownTimer = newTimerValue;};
 
+	void setAniY(int a) { aniY = a; };
+
 	sf::Texture& getTex() { return sheet; };
 
 private:

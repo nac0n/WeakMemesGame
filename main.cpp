@@ -248,6 +248,7 @@ int main()
 				mX /= (int)(32 * (((double)window.getSize().x) / ((double)1280)));
 				mY /= (int)(32 * (((double)window.getSize().y) / ((double)720)));
 
+				//Adds new tower/soldier
 				if (test.getMat().at(mX, mY) == 0 && towerMat.at(mX, mY) == 0) {
 					towerMat.at(mX, mY) = 1;
 					Character tmp("Data/soldier.txt");
@@ -338,37 +339,75 @@ int main()
 			{
 				if(mehicans[m].getGone() == false) 
 				{
+					
+						if (soldiers[i].hasInRange(mehicans[m]))
+						{
+							//soldiers[i].shoot(mehicans[m]);
 
-					if(soldiers[i].hasInRange(mehicans[m])) 
-					{
-						//soldiers[i].shoot(mehicans[m]);
+							//cout << soldiers[i].getAttackCooldown() << endl;
 
-						//cout << soldiers[i].getAttackCooldown() << endl;
+							int dy = mehicans[m].getY() - soldiers[i].getY();
+							int dx = mehicans[m].getX() - soldiers[i].getX();
 
-						if(mehicans[m].getHealth() > 0 && soldiers[i].getAttackCooldown() == false) {
+							double v{ 0 };
+							double v2{ 0 };
 
-							mehicans[m].setHealth(mehicans[m].getHealth() -1);
-							//cout << mehicans[m].getHealth() << endl;
+							if (dx != 0) {
+								v = atan2(dy, dx) * 180 / 3.14;
 
-							if(mehicans[m].getHealth() <= 0) {
-								mehicans[m].setGone(true);
-								gone += 1;
-								current_currency += mehicans[m].getCurrencyValue();
-								cout << current_currency << endl;
 							}
 
-							
-							soldiers[i].setAttackCooldown(true);
-							cout << soldiers[i].getAttackCooldown() << endl;
+
+							//v = v * 180 / 3.14;
+
+							if (v > -135 && v <= -45) {
+								soldiers[i].setAniY(1); //up
+														//cout << "looking up" << endl;
+							}
+							else if (v < -135 || v > 135) {
+								soldiers[i].setAniY(5); //left
+														//cout << "looking left" << endl;
+							}
+							else if (v >= 45 && v < 135) {
+								soldiers[i].setAniY(3); //down
+														//cout << "looking down" << endl;
+							}
+							else {
+								soldiers[i].setAniY(7); //right
+														//cout << "looking right" << endl;
+							}
+
+
+							cout << soldiers[i].getSheetY() << endl;
+
+							if (mehicans[m].getHealth() > 0 && soldiers[i].getAttackCooldown() == false) {
+
+
+
+								mehicans[m].setHealth(mehicans[m].getHealth() - 1);
+								//cout << mehicans[m].getHealth() << endl;
+
+								if (mehicans[m].getHealth() <= 0) {
+									mehicans[m].setGone(true);
+									gone += 1;
+									current_currency += mehicans[m].getCurrencyValue();
+									cout << current_currency << endl;
+								}
+								soldiers[i].setAttackCooldown(true);
+								cout << soldiers[i].getAttackCooldown() << endl;
+
+							}
+
+							break;
+							//break is needed to not shoot more than one mexican
 						}
-						
-						break;
-						//break is needed to not shoot more than one mexican
 					}
+
+					
 					
 				}
 				
-			}
+			
 			
 		}
 
@@ -402,7 +441,7 @@ int main()
 			
 		}
 
-		//END THE GAME YOU FUCKING ARYAN FAILURE
+		
 		
 		if (gone == currentWave[curWave]) {
 			cout << gone << " : " << currentWave[curWave] << " : " << curWave << endl;
@@ -425,6 +464,8 @@ int main()
 			}
 		}
 
+
+		//END THE GAME YOU FUCKING ARYAN FAILURE
 		if (escaped >= tooMany) {
 
 
