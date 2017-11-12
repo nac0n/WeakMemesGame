@@ -10,7 +10,6 @@ Maps::Maps(std::string a)
 	if (!mapFile) {
 		perror("Fuck: ");
 	}
-	cout << a << endl;
 	
 
 
@@ -23,7 +22,7 @@ Maps::Maps(std::string a)
 	mapFile >> endX;
 	mapFile >> endY;
 
-	cout << endX << " : " << endY << endl;
+	
 	
 	Matrix tmp(x, y);
 
@@ -43,12 +42,7 @@ Maps::Maps(std::string a)
 		}
 	}
 
-	for (int i{ 0 }; i < x; ++i) {
-		for (int j{ 0 }; j < y; ++j) {
-			cout << mat.at(i, j) << " ";
-		}
-		cout << endl;
-	}
+	
 
 	mapFile.close();
 }

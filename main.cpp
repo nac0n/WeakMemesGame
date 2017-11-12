@@ -413,7 +413,7 @@ int main()
 									mehicans[m].setGone(true);
 									gone += 1;
 									current_currency += mehicans[m].getCurrencyValue();
-									cout << current_currency << endl;
+									//cout << current_currency << endl;
 									mexicansLeftCounter.setString(to_string(currentWave[curWave] - gone));
 									currencyValueText.setString(to_string(current_currency));
 
@@ -445,7 +445,7 @@ int main()
 
 			if ((sX == test.getEndX()) && (sY == test.getEndY()) && mehicans[i].getGone() == false) {
 				mehicans[i].setGone(true);
-				cout << i << endl;
+				//cout << i << endl;
 				escaped++;
 				mexicansEscapedCounter.setString(to_string(escaped));
 				gone++;
@@ -470,7 +470,7 @@ int main()
 		
 		
 		if (gone == currentWave[curWave]) {
-			cout << gone << " : " << currentWave[curWave] << " : " << curWave << endl;
+			//cout << gone << " : " << currentWave[curWave] << " : " << curWave << endl;
 			buildPhase = true;
 			phaseTimer = std::chrono::high_resolution_clock::now();
 			gone = 0;
@@ -487,11 +487,11 @@ int main()
 				tmp += std::to_string(mapCounter);
 				tmp += ".txt";
 
-				cout << tmp << endl;
+				//cout << tmp << endl;
 				std::string nextMap{ tmp };
 				test = Maps{ nextMap };
 
-				cout << "Next map" << endl;
+				//cout << "Next map" << endl;
 
 				curWave = 0;
 				towerMat.fillWith(0);
