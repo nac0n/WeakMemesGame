@@ -109,20 +109,26 @@ void Character::update(Matrix mat)
 	aniY = facing;
 
 }
-/*
-bool Character::hasInRange(Character mexican) {
-	if(canAttack) 
-	{
-		if() 
-		{
 
-		}
+bool Character::hasInRange(Character mexican) {
+	if(calculatedDistance(mexican) >= range)
+	{
+		return true;
 	}
-	return true;
+	return false;
 }
+
+float calculatedDistance(Character mexican) {
+	sf::Vector2f mexVect(mexican.getX(), mexican.getY());
+	int tempx = getX();
+	sf::Vector2f soldierVect(getX(), getY());
+
+	return 0.f;
+
+}
+
 void Character::shootOnce(Character mexican) {
 
 }
-*/
 
 

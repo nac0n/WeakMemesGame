@@ -14,7 +14,9 @@ public:
 	~Character() = default;
 
 	void update(Matrix mat);
-	void attack();
+	bool hasInRange(Character mexican);
+	float calculatedDistance(Character mexican);
+	void shootOnce(Character mexican);
 
 	int getSheetX() { return aniX; };
 	int getSheetY() { return aniY; };
