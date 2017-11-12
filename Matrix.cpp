@@ -45,6 +45,10 @@ void Matrix::fillWith(const int i) {
 }
 
 int& Matrix::at(int x, int y) {
+	if (x < 0 || y < 0) {
+		return zeroCheck;
+	}
+	
 	if (x >= width)
 		x = width - 1;
 	if (y >= height)
