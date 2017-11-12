@@ -5,5 +5,5 @@ Content/spriteSheets/soldierbigsheet.png
 0
 2
 0
-250.f
+125.f
 60
