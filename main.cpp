@@ -228,6 +228,7 @@ int main()
 
 	auto gameTimer = std::chrono::high_resolution_clock::now();
 
+	int spawnCD{ 800 };
 
     while (window.isOpen())
     {
@@ -279,7 +280,7 @@ int main()
 
 			//SPAWNING THE MEHICANS
 			//----------------------------------------
-			if (elapsed > 800 && spawned < currentWave[curWave]) {
+			if (elapsed > spawnCD && spawned < currentWave[curWave]) {
 				Character tmp("Data/mexican.txt");
 				tmp.setPosMat(test.getStartX(), test.getStartY());
 				mehicans.push_back(tmp);
@@ -453,6 +454,9 @@ int main()
 			gone = 0;
 			curWave++;
 			spawned = 0;
+
+			spawnCD -= 20;
+
 			mehicans.clear();
 
 			if (curWave == 10) {
