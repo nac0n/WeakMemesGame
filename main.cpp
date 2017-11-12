@@ -229,6 +229,7 @@ int main()
 	auto gameTimer = std::chrono::high_resolution_clock::now();
 
 	int spawnCD{ 800 };
+	int maxTowers{ 0 };
 
     while (window.isOpen())
     {
@@ -252,13 +253,14 @@ int main()
 				mY /= (int)(32 * (((double)window.getSize().y) / ((double)720)));
 
 				//Adds new tower/soldier
-				if (test.getMat().at(mX, mY) == 0 && towerMat.at(mX, mY) == 0 && current_currency >= 100) {
+				if (test.getMat().at(mX, mY) == 0 && towerMat.at(mX, mY) == 0 && current_currency >= 100 && maxTowers < 20) {
 					towerMat.at(mX, mY) = 1;
 					Character tmp("Data/soldier.txt");
 					tmp.setPosMat(mX, mY);
 					soldiers.push_back(tmp);
 					current_currency -= 100;
 					currencyValueText.setString(to_string(current_currency));
+					maxTowers++;
 				}
 
 			}
@@ -344,7 +346,7 @@ int main()
 			{
 				if(mehicans[m].getGone() == false) 
 				{
-					
+					if(soldiers[i].getAttackCooldown() == false)
 						if (soldiers[i].hasInRange(mehicans[m]))
 						{
 							//soldiers[i].shoot(mehicans[m]);
@@ -385,7 +387,7 @@ int main()
 
 							//cout << soldiers[i].getSheetY() << endl;
 
-							if (mehicans[m].getHealth() > 0 && soldiers[i].getAttackCooldown() == false) {
+							if (mehicans[m].getHealth() > 0) {
 								mehicans[m].setHealth(mehicans[m].getHealth() - soldiers[i].getDamage());
 								//cout << mehicans[m].getHealth() << endl;
 
@@ -468,6 +470,10 @@ int main()
 
 				curWave = 0;
 				towerMat.fillWith(0);
+				maxTowers = 0;
+				current_currency = 300;
+				currencyValueText.setString(to_string(current_currency));
+				spawnCD = 800;
 			}
 		}
 
