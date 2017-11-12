@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "Matrix.h"
 #pragma once
+
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
@@ -35,7 +36,7 @@ public:
 	void setGone(bool a) { gone = a; };
 
 	bool getAttackCooldown() { return attackCooldown; };
-	bool setAttackCooldown(bool setBool) {attackCooldown = setBool;};
+	void setAttackCooldown(bool setBool) {attackCooldown = setBool;};
 
 	int getCooldownTimer() { return cooldownTimer;};
 	void setCooldownTimer(int newTimerValue) { cooldownTimer = newTimerValue;};
