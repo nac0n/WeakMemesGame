@@ -40,6 +40,8 @@ public:
 
 	int getCurrencyValue() {return currency_value;};
 
+	int getDamage() {return damage;};
+
 	int getCooldownTimer() { return cooldownTimer;};
 	void setCooldownTimer(int newTimerValue) { cooldownTimer = newTimerValue;};
 
@@ -68,7 +70,7 @@ private:
 	int firerate{ 0 };
 	int facing{ 0 }; //0 = up, 1 = right, 2 = down, 3 = left
 	int cooldownTimer {0};
-	int currency_value {40};
+	int currency_value {20};
 
 	std::string loadFile;
 

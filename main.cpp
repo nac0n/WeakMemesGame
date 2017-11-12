@@ -39,7 +39,7 @@ int main()
 
 	//GAME LOGIC VARIABLES
 	//--------------------------------------
-	int current_currency = 200;
+	int current_currency = 300;
 
 
 	//--------------------------------------
@@ -93,6 +93,7 @@ int main()
 
 	sf::Text currencyValueText;
 	currencyValueText.setFont(font);
+	currencyValueText.setString(to_string(current_currency));
 	currencyValueText.setCharacterSize(16);
 	currencyValueText.setFillColor(sf::Color::White);
 
@@ -104,6 +105,7 @@ int main()
 
 	sf::Text mexicansLeftCounter;
 	mexicansLeftCounter.setFont(font);
+	mexicansLeftCounter.setString("" + 0);
 	mexicansLeftCounter.setCharacterSize(16);
 	mexicansLeftCounter.setFillColor(sf::Color::Green);
 
@@ -249,11 +251,13 @@ int main()
 				mY /= (int)(32 * (((double)window.getSize().y) / ((double)720)));
 
 				//Adds new tower/soldier
-				if (test.getMat().at(mX, mY) == 0 && towerMat.at(mX, mY) == 0) {
+				if (test.getMat().at(mX, mY) == 0 && towerMat.at(mX, mY) == 0 && current_currency >= 100) {
 					towerMat.at(mX, mY) = 1;
 					Character tmp("Data/soldier.txt");
 					tmp.setPosMat(mX, mY);
 					soldiers.push_back(tmp);
+					current_currency -= 100;
+					currencyValueText.setString(to_string(current_currency));
 				}
 
 			}
@@ -378,13 +382,10 @@ int main()
 							}
 
 
-							cout << soldiers[i].getSheetY() << endl;
+							//cout << soldiers[i].getSheetY() << endl;
 
 							if (mehicans[m].getHealth() > 0 && soldiers[i].getAttackCooldown() == false) {
-
-
-
-								mehicans[m].setHealth(mehicans[m].getHealth() - 1);
+								mehicans[m].setHealth(mehicans[m].getHealth() - soldiers[i].getDamage());
 								//cout << mehicans[m].getHealth() << endl;
 
 								if (mehicans[m].getHealth() <= 0) {
@@ -392,9 +393,11 @@ int main()
 									gone += 1;
 									current_currency += mehicans[m].getCurrencyValue();
 									cout << current_currency << endl;
+									currencyValueText.setString(to_string(current_currency));
+
 								}
 								soldiers[i].setAttackCooldown(true);
-								cout << soldiers[i].getAttackCooldown() << endl;
+								//cout << soldiers[i].getAttackCooldown() << endl;
 
 							}
 

@@ -4,6 +4,6 @@ Content/spriteSheets/MexicanRunningSideSheet.png
 0
 1
 0
-15
+10
 0
 0
