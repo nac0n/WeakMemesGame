@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "Matrix.h"
 #pragma once
+
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
@@ -24,7 +25,7 @@ public:
 	int getY() { return y; };
 
 	int getHealth() { return health;};
-	int setHealth(int newHealth) { health = newHealth;};
+	void setHealth(int newHealth) { health = newHealth;};
 
 	int getStartX() { return startX; };
 	int getStartY() { return startY; };
@@ -35,10 +36,10 @@ public:
 	void setGone(bool a) { gone = a; };
 
 	bool getAttackCooldown() { return attackCooldown; };
-	bool setAttackCooldown(bool setBool) {attackCooldown = setBool;};
+	void setAttackCooldown(bool setBool) {attackCooldown = setBool;};
 
 	int getCooldownTimer() { return cooldownTimer;};
-	int setCooldownTimer(int newTimerValue) { cooldownTimer = newTimerValue;};
+	void setCooldownTimer(int newTimerValue) { cooldownTimer = newTimerValue;};
 
 	sf::Texture& getTex() { return sheet; };
 
