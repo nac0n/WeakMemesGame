@@ -252,7 +252,7 @@ int main()
 				mY /= (int)(32 * (((double)window.getSize().y) / ((double)720)));
 
 				//Adds new tower/soldier
-				if (test.getMat().at(mX, mY) == 0 && towerMat.at(mX, mY) == 0 && current_currency >= 100 && maxTowers < 20) {
+				if (test.getMat().at(mX, mY) == 0 && towerMat.at(mX, mY) == 0 && current_currency >= 100 && maxTowers < 15) {
 					towerMat.at(mX, mY) = 1;
 					Character tmp("Data/soldier.txt");
 					tmp.setPosMat(mX, mY);
@@ -481,13 +481,17 @@ int main()
 				currencyValueText.setString(to_string(current_currency));
 				spawnCD = 800;
 				
+				if (mapCounter == 4) {
+					window.close();
+				}
+
 			}
 		}
 
 
 		//END THE GAME YOU FUCKING ARYAN FAILURE
 		if (escaped >= tooMany) {
-
+			window.close();
 
 		}
 		
