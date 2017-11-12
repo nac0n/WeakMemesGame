@@ -24,7 +24,7 @@ public:
 	int getY() { return y; };
 
 	int getHealth() { return health;};
-	int setHealth(int newHealth) { health = newHealth;};
+	void setHealth(int newHealth) { health = newHealth;};
 
 	int getStartX() { return startX; };
 	int getStartY() { return startY; };
@@ -38,7 +38,7 @@ public:
 	bool setAttackCooldown(bool setBool) {attackCooldown = setBool;};
 
 	int getCooldownTimer() { return cooldownTimer;};
-	int setCooldownTimer(int newTimerValue) { cooldownTimer = newTimerValue;};
+	void setCooldownTimer(int newTimerValue) { cooldownTimer = newTimerValue;};
 
 	sf::Texture& getTex() { return sheet; };
 
