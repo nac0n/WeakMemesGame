@@ -30,8 +30,6 @@ Character::Character(std::string conf)
 
 }
 
-
-
 void Character::update(Matrix mat)
 {
 
@@ -90,7 +88,7 @@ void Character::update(Matrix mat)
 
 
 	if (canAttack) {
-		
+
 	}
 
 
@@ -109,6 +107,19 @@ void Character::update(Matrix mat)
 	++counter;
 
 	aniY = facing;
+
+}
+bool Character::hasInRange(Character mexican) {
+	if(canAttack) 
+	{
+		if() 
+		{
+
+		}
+	}
+	return true;
+}
+void Character::shootOnce(Character mexican) {
 
 }
 
